@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <?php
+        if(isset($page)){
+
+            $r = strripos($page,"/");
+
+            if ($r === false) {
+                $p[1] = $page;
+            }else{
+                $p = explode("/", $page);
+            }
+
+        }else{
+            $p[1] = "SRCAM";
+        }
+    ?>
+
+    <title><?= strtoupper($p[1]) ?></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <?php
+        require_once "../SRCAM/app/Classes/LibraryHtml.php";
+        $lib = new LibraryHtml();
+    
+        echo $lib->headerPadrao();
+
+        if (isset($page)) {
+            switch ($page) {
+                case "SRCAM":
+                case "Admin":
+                    echo $lib->headerHome();
+                    break;
+                case "Login":
+                    echo $lib->headerLogin();
+                    break;
+                case "registrar/inserir":
+                case "registrar/alterar":
+                case "registrar/excluir":
+                    echo $lib->headerInserir();
+                    break;
+                case "registrar/visualizar":
+                    echo $lib->headerRegistrarVisualizar();
+                    break;
+            }
+        }
+    ?>
+
+
+
+

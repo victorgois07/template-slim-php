@@ -1,0 +1,55 @@
+<section id="sectionPrincipal" class="d-flex justify-content-center">
+    <div class="card">
+        <h4 class="card-header">Tipo de Relatório Diário</h4>
+        <div class="card-body text-center">
+
+            <button id="btnRelatorioAcampanhamentoManha" type="button" class="btn btn-primary">
+                <i class="fa fa-file-picture-o" aria-hidden="true"></i>
+                Acampanhamento de Incidente - Manhã
+            </button>
+
+            <button id="btnRelatorioAcampanhamentoTarde" type="button" class="btn btn-danger">
+                <i class="fa fa-database" aria-hidden="true"></i>
+                Acampanhamento de Incidente - Tarde
+            </button>
+
+            <button type="button" class="btn btn-light">
+                <i class="fa fa-file-picture-o" aria-hidden="true"></i>
+                Acampanhamento de Incidente - Noite
+            </button>
+
+            <button type="button" class="btn btn-info">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                Acampanhamento de Incidente - Madrugada
+            </button>
+
+            <button type="button" class="btn btn-success">
+                <i class="fa fa-database" aria-hidden="true"></i>
+                Acampanhamento de WO
+            </button>
+
+        </div>
+        <div id="divFooterInforWarning" class="card-footer d-none">
+            <article class="alert alert-warning" role="alert">
+                Para Extrair essas informações será necessário tirar o relatorio no <a
+                    href="http://relatorios.servicos.caixa/arsys/shared/login.jsp?/arsys/forms/cctdcapllx0199.df.caixa/AR%20System%20Report%20Console" target="_blank">SIGSC</a> e colocá-lo no caminho especifico
+                <a href="?teste=false" target="_blank">Click Aqui</a>
+            </article>
+            <button id="btnContinuaAlert" type="button" class="btn btn-primary">Continuar</button>
+            <?php
+            if (isset($_GET['teste'])) {
+                system('start files\\');
+            }
+            ?>
+        </div>
+    </div>
+
+    <div id="jumbTable" class="jumbotron jumbotron-fluid d-none">
+        <div id="dadosTabelaDinamica"></div>
+    </div>
+</section>
+
+<?php
+    
+    
+?>

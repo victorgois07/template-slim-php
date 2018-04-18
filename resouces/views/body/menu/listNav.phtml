@@ -1,0 +1,251 @@
+<?php
+    $caminhoImagem = PATH."/public/img/";
+    $tagCp1 = "data-toggle='popover' data-placement='right' type='button' class='list-group-item list-group-item-action active'";
+    $tagCp2 = "data-toggle='popover' data-placement='right' type='button' class='list-group-item list-group-item-action'";
+    $tagCpRegistro = "type='button' class='list-group-item list-group-item-action list-group-item-info list-class-down dropRegistro' data-toggle='popover' data-placement='right'";
+    $tagCpLote = "type='button' class='list-group-item list-group-item-action list-group-item-info list-class-down droplote' data-toggle='popover' data-placement='right'";
+    $tagCpRelatorio = "type='button' class='list-group-item list-group-item-action list-group-item-info list-class-down dropRelatorio' data-toggle='popover' data-placement='right'";
+    $tagCpInforme = "type='button' class='list-group-item list-group-item-action list-group-item-info list-class-down dropInforme' data-toggle='popover' data-placement='right'";
+    $tagCpDocumentacao = "type='button' class='list-group-item list-group-item-action list-group-item-info list-class-down dropDocumentacao' data-toggle='popover' data-placement='right'";
+    $tagCpStatus = "type='button' class='list-group-item list-group-item-action list-group-item-info list-class-down dropStatus' data-toggle='popover' data-placement='right'";
+    $tagCpContatos = "type='button' class='list-group-item list-group-item-action list-group-item-info list-class-down dropContatos' data-toggle='popover' data-placement='right'";
+    $tagCpPainel = "type='button' class='list-group-item list-group-item-action list-group-item-info list-class-down dropPainel' data-toggle='popover' data-placement='right'";
+    $espacoHtml = "&nbsp&nbsp&nbsp&nbsp&nbsp";
+    $href = array(
+        0 => "location.href = '".REGISTRO.$bd->gerarCodigoRegistroBD()."/inserir'"
+    );
+
+
+    if (isset($indice)) {
+        foreach ($indice as $row => $varsInd) {
+            $matricula = $varsInd['matricula'];
+            $nome = $varsInd['nome'];
+        }
+    }
+
+?>
+
+<section id="div-fundo" class="container-fluir">
+    <div id="div-list-group" class="list-group">
+
+        <button id="btn-home" title="Página Principal" data-content="Volte a página principal ao clicar nesse item" <?= $tagCp1 ?>>
+            <img src="<?= $caminhoImagem ?>044-house.png" alt="home">
+            Página Principal
+        </button>
+
+
+        <!-- BOTÃO DE REGISTRO DE CHAMADO FEITO UM POR UM. O USUÁRIO PODERÁ EXCLUIR, INSERIR, ALTERAR, VISUALIZAR SEUS CHAMADOS  -->
+
+        <button id="btn-registro" <?= $tagCp2 ?> title="Registro" data-content="Nesse item você pode registrar sua ocorrência, alterar, visualizar e excluir conforme regra de négicio estabaleciada">
+            <img src="<?= $caminhoImagem ?>005-note.png" alt="">
+            Registro <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </button>
+
+            <button id="btn-registro-inserir"  title="Inserir" data-content="Registre suas demandas" onclick="<?= $href[0] ?>" <?= $tagCpRegistro ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>019-pencil.png" alt="">
+                Inserir
+            </button>
+            <button id="btn-registro-excluir" title="Excluir" data-content="Exclua suas demandas" <?= $tagCpRegistro ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>012-trash.png" alt="">
+                Excluir
+            </button>
+
+            <button id="btn-registro-alterar" title="Alterar" data-content="Altere suas demandas" <?= $tagCpRegistro ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>031-draw.png" alt="">
+                Alterar
+            </button>
+
+            <button id="btn-registro-visualizar" title="Visualize" data-content="Visualize suas demandas" <?= $tagCpRegistro ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>029-interface-2.png" alt="">
+                Visualizar
+            </button>
+
+        <!-- BOTÃO DE LOTE PARA PESQUISA, ALTERAÇÃO, EXCLUSÃO, INCREÇÃO EM LOTE -->
+
+        <button id="btn-lote" title="Lote" data-content="Nesse item você pode registrar sua ocorrência, alterar, visualizar e excluir conforme regra de négicio estabaleciada em Lote" <?= $tagCp2 ?>>
+            <img src="<?= $caminhoImagem ?>018-technology-4.png" alt="">
+            Lote <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </button>
+
+            <button id="btn-lote-inserir" title="Inserir" href="" data-content="Registre suas demandas" <?= $tagCpLote ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>019-pencil.png" alt="">
+                Inserir
+            </button>
+            <button id="btn-lote-excluir" title="Excluir" data-content="Exclua suas demandas" <?= $tagCpLote ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>012-trash.png" alt="">
+                Excluir
+            </button>
+
+            <button id="btn-lote-alterar" title="Alterar" data-content="Altere suas demandas" <?= $tagCpLote ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>031-draw.png" alt="">
+                Alterar
+            </button>
+
+            <button id="btn-lote-visualizar" title="Visualize" data-content="Visualize suas demandas" <?= $tagCpLote ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>029-interface-2.png" alt="">
+                Visualizar
+            </button>
+
+        <!-- BOTÃO DE RELATÓRIO O USUÁRIO PODE EXTRAIR DA BASE DA DADOS AS INFORMAÇÕES RELEVANTE PARA O SERVIÇO. COM OS METODOS DIA, MÊS E ANO FILTRANDO AS INFORMAÇÕES PARA UMA MELHOR PESQUISA -->
+
+        <button id="btn-relatorio" title="Relatório" data-content="Extraia os relatórios da base de dados do sistema referente as demandas registrar" <?= $tagCp2 ?>>
+            <img src="<?= $caminhoImagem ?>001-computer-2.png" alt="">
+            Relatório <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </button>
+
+            <button id="btn-relatorio-dia" title="Dia" data-content="Extrair relatorio do(s) dia(s)" <?= $tagCpRelatorio ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>007-graphic-2.png" alt="">
+                Dia
+            </button>
+            <button id="btn-relatorio-mes" title="Mês" data-content="Extrair relatorio do(s) mes(s)" <?= $tagCpRelatorio ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>008-graphic-1.png" alt="">
+                Mês
+            </button>
+
+            <button id="btn-relatorio-ano" title="Ano" data-content="Extrair relatorio do(s) ano(s)" <?= $tagCpRelatorio ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>008-analytics-7.png" alt="">
+                Ano
+            </button>
+
+        <!-- BOTÃO DE INFORME: O USUÁRIO PODERÁ INSERIR, EXCLUIR, ALTERAR, VISUALIZAR OS NOTIFICAÇÕES DA EQUIPE E EVENTO FUTURO OU QUE ESTÃO ACONTECENDO -->
+
+        <button id="btn-informe" title="Informe" data-content="Publique, exclua, altere e visualize seu informe" <?= $tagCp2 ?>>
+            <img src="<?= $caminhoImagem ?>022-chat.png" alt="">
+            Informe <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </button>
+
+            <button id="btn-informe-inserir" title="Inserir" data-content="Registre seus informes" <?= $tagCpInforme ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>019-pencil.png" alt="">
+                Inserir
+            </button>
+            <button id="btn-informe-excluir" title="Excluir" data-content="Exclua seus informes" <?= $tagCpInforme ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>012-trash.png" alt="">
+                Excluir
+            </button>
+    
+            <button id="btn-informe-alterar" title="Alterar" data-content="Altere seus informes" <?= $tagCpInforme ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>031-draw.png" alt="">
+                Alterar
+            </button>
+    
+            <button id="btn-informe-visualizar" title="Visualize" data-content="Visualize seus informes" <?= $tagCpInforme ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>029-interface-2.png" alt="">
+                Visualizar
+            </button>
+
+        <!-- BOTÃO DE DOCUMENTAÇÃO: O USUÁRIO PODERÁ FAZER UM CRUD NAS INFORMAÇÕES DOCUMENTADAS DOS SERVIÇOS REALIZADO PELA EQUIPE -->
+
+        <button id="btn-documentacao" title="Documentação" data-content="Fontes contendo informações que ajudem a tomar decisões, comuniquem decisões tomadas, registrem assuntos de interesse da organização" <?= $tagCp2 ?>>
+            <img src="<?= $caminhoImagem ?>023-archive.png" alt="">
+            Documentação <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </button>
+
+            <button id="btn-documentacao-inserir"  title="Inserir" data-content="Importe suas documentações" <?= $tagCpDocumentacao ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>019-pencil.png" alt="">
+                Inserir
+            </button>
+            <button id="btn-documentacao-excluir" title="Excluir" data-content="Exclua suas documentações" <?= $tagCpDocumentacao ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>012-trash.png" alt="">
+                Excluir
+            </button>
+
+            <button id="btn-documentacao-alterar" title="Alterar" data-content="Altere suas documentações" <?= $tagCpDocumentacao ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>031-draw.png" alt="">
+                Alterar
+            </button>
+
+            <button id="btn-documentacao-visualizar" title="Visualize" data-content="Visualize suas documentações" <?= $tagCpDocumentacao ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>029-interface-2.png" alt="">
+                Visualizar
+            </button>
+
+            <button id="btn-documentacao-extrair" title="Visualize" data-content="Extraia suas documentações" <?= $tagCpDocumentacao ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>024-multimedia.png" alt="">
+                Extrair
+            </button>
+
+        <!-- BOTÃO DE STATUS: GERA UM RELATORIO PERSONALIZADO PARA EXTRAÇÃO DA INFORMAÇÕES DA SEMANA E MÊS REFERENTE A EQUIPE -->
+
+        <button id="btn-statusReport" title="Status Report" data-content="Relatórios diários, semanais, mensais e anuais sobre equipe Central de Atendimento e Monitoração" <?= $tagCp2 ?>>
+            <img src="<?= $caminhoImagem ?>027-analytics-1.png" alt="">
+            Status Report <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </button>
+
+            <button id="btn-statusReport-semana" title="Semana" data-content="Extrair Status Report semanal" <?= $tagCpStatus ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>007-graphic-2.png" alt="">
+                Semana
+            </button>
+            <button id="btn-statusReport-mes" title="Mês" data-content="Extrair Status Report mensal" <?= $tagCpStatus ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>008-graphic-1.png" alt="">
+                Mês
+            </button>
+
+        <!-- BOTÃO DE CONTAYOS: O USUÁRIO PODERÁ EFETUAR O CRUD DA BASE DE DADOS DOS CONTATO -->
+
+        <button id="btn-contatos" title="Contatos" data-content="Insira, visualize, exclua e altere os contatos" <?= $tagCp2 ?>>
+            <img src="<?= $caminhoImagem ?>009-agenda-2.png" alt="">
+            Contatos <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </button>
+
+            <button id="btn-contatos-inserir" title="Inserir" data-content="Registre seus contatos" <?= $tagCpContatos ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>019-pencil.png" alt="">
+                Inserir
+            </button>
+            <button id="btn-contatos-excluir" title="Excluir" data-content="Exclua seus contatos" <?= $tagCpContatos ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>012-trash.png" alt="">
+                Excluir
+            </button>
+    
+            <button id="btn-contatos-alterar" title="Alterar" data-content="Altere seus contatos" <?= $tagCpContatos ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>031-draw.png" alt="">
+                Alterar
+            </button>
+    
+            <button id="btn-contatos-visualizar" title="Visualize" data-content="Visualize seus contatos" <?= $tagCpContatos ?>>
+                <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>029-interface-2.png" alt="">
+                Visualizar
+            </button>
+
+        <!-- BOTÃO COM O PAINEL DE INCIDENTE, PAINEL DE QUANTITATIVO -->
+
+        <button id="btn-painel" title="Painel" data-content="Painel de Incidente e Painel de Quantitativo de Incidente" <?= $tagCp2 ?>>
+            <img src="<?= $caminhoImagem ?>002-computer-1.png" alt="">
+            Painel <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </button>
+
+        <button id="btn-painel-incidente" title="Incidentes" data-content="Acompanhamento de Incidente por horário 2h, 4h, 6h, 8h, >8h" <?= $tagCpPainel ?>>
+            <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>002-graphic-4.png" alt="">
+            Acompanhamento
+        </button>
+        <button id="btn-painel-quantitativo" title="Quantitativo" data-content="Quantitativo de Incidente por grupo e vencidos ou não" <?= $tagCpPainel ?>>
+            <?= $espacoHtml ?><img src="<?= $caminhoImagem ?>004-graphic-3.png" alt="">
+            Quantitativo
+        </button>
+
+        <!-- BOTÃO DE TUTOTIAL: NESSA PÁGINA O USUÁRIO SERÁ ORIENTADO A UTILIZAR A PÁGINA E TODOS OS SEUS RECURSOS -->
+
+        <button id="btn-tutorial" title="Tutorial" data-content="Tutorial sobre o uso da página" <?= $tagCp2 ?>>
+            <img src="<?= $caminhoImagem ?>005-video.png" alt="">
+            Tutorial
+        </button>
+
+        <!-- BOTÃO DE ADMIN - MODO DE ADMINISTRAÇÃO DA PÁGINA  -->
+
+        <?php
+        if (isset($tipo) && $tipo == "Administrador"){
+            echo "<button id='btn-admin' title='Documentação' data-content='Area somenta para usuários administrativo' <?= $tagCp2 ?>
+                <img src='".$caminhoImagem."040-lock.png' alt=''> Administrativo</button>";
+        }
+        ?>
+        
+    </div>
+    <?php
+
+        if(isset($containerPrincipal) && $containerPrincipal == "tutorial"){
+            echo "<div id='divRegistroItem' class='container-fluid d-flex justify-content-center'>
+                <button id='buttonCrud' type='button' class='btn btn-warning btn-lg'><i class='fa fa-plus-square-o'></i></button>
+            </div>";
+        }
+    ?>
+</section>
+

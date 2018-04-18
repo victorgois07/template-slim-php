@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Action;
+namespace app\Action;
 
-final class HomeAction extends Action{
+final class StatusReportAction extends Action{
+    public function console_status($request, $response){
 
-    public function index($request, $response){
-
-        $vars['page'] = "Login";
+        $vars['page'] = "home";
 
         return $this->view->render($response, 'template.phtml', $vars);
     }
 
-    public function sobre($request, $response){
+    public function status_report_mes($request, $response){
 
         $vars['page'] = "sobre";
 
         return $this->view->render($response, 'template.phtml', $vars);
     }
 
-    public function contato($request, $response){
+    public function status_report_semana($request, $response){
 
         $vars['page'] = "contato";
 

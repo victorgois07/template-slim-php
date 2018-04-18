@@ -1,0 +1,270 @@
+<?php
+    require_once "app/Classes/ManipulacaoHtml.php";
+    $form = new ManipulacaoHtml();
+    $url = explode("/", $_SERVER['REQUEST_URI']);
+?>
+
+<section id="sectionRegistroInserir" class="jumbotron jumbotron-fluid d-flex justify-content-center">
+
+    <form id="formRegistroInserir" class="form-group" method="post" action="<?= $_SERVER['REQUEST_URI'] ?>">
+
+        <!-- TOPO DO SECTION - TITULO E SUBTITULO -->
+        <div id="divRegistroContainer" class="container-fluid">
+
+            <blockquote class="blockquote text-center">
+
+                <h2><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Registro</h2>
+                <footer class="blockquote-footer justify-content-center">Registro de Ocorrências</footer>
+
+            </blockquote>
+
+        </div>
+
+            <!-- BOTÕES DE CADASTRO DE SISTEMA E CLIENTE -->
+
+            <button id="buttonCadastroSistema" type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modalCadastrarSistema">Cadastra Sistema</button>
+            <button id="buttonCadastroCliente" type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#modalCadastrarCliente">Cadastra Cliente</button>
+
+        <div id="containerFormDados" class="container">
+            <div id="rowRegisro" class="row">
+
+                <?= $form->divInput("col-3","inputCodigoRegistro","fa fa-code","font-weight-bold","Código de Registro",$url[3],"readonly","","divCodigoRegistro") ?>
+
+                <div id="divTipoRequisicao" class="col-3">
+                    <label for="inputTipoReq" class="font-weight-bold">Tipo de Requisição<strong style="color: red">*</strong></label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-indent" aria-hidden="true"></i></span>
+                        <select id="inputTipoReq" class="form-control" name="inputTipoReq" required>
+                            <option selected disabled></option>
+                            <?php
+                                if(isset($tipoOcorrencia)){
+                                    for($i=0; $i<count($tipoOcorrencia[0]); $i++){
+                                        $v = $tipoOcorrencia[0][$i]['TIPO_OCORRENCIA'];
+                                        $d = $tipoOcorrencia[1][$i]['descricao'];
+                                        echo "<option value='$d'>$v</option>";
+                                    }
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+
+                <?= $form->divInput("col-3","inputNIncidente","fa fa-exclamation-triangle","font-weight-bold","Nº Chamado","","","id='labelChamadoNumero'","divNumeroChamado") ?>
+
+                <?= $form->divInput("col-3","inputCliente","fa fa-user","font-weight-bold","Cliente","","","","divInputCliente") ?>
+
+                <?= $form->divInput("col-3","inputSiteCliente","fa fa-user-circle","font-weight-bold","Site do Cliente","","","","divSiteCliente") ?>
+
+                <?= isset($selectTipoFalha)?$form->divSelect($selectTipoFalha,"selectTipoFalha","Tipo de Falha","fa fa-bell-o","col-3","js-example-basic-single","divTipoFalha"):"" ?>
+
+                <?= isset($selectSistemas)?$form->divSelect($selectSistemas,"selectSistema","Sistema","fa fa-object-group","col-3","js-example-basic-single","divSistemas"):"" ?>
+
+                <?= $form->divInput("col-3","inputIC","fa fa-code","font-weight-bold","IC","","","","divIC") ?>
+
+                <?= isset($selectPrioridade)?$form->divSelect($selectPrioridade,"selectPrioridade","Prioridade","fa fa-bullhorn","col-3","form-control","divPrioridade"):"" ?>
+
+                <div id='divDataAbertura' class='col-3'>
+                    <label  for='inputDataAbertura' class='font-weight-bold'>Criado em<strong style='color: red'>*</strong></label>
+                    <div class='input-group'>
+                        <span class='input-group-addon'><i class='fa fa-calendar' aria-hidden='true'></i></span>
+                        <input type='text' class='form-control' id='inputDataAbertura' name='inputDataAbertura' data-format="dd/MM/yyyy hh:mm"  required>
+                    </div>
+                </div>
+
+                <?= $form->divInput("col-3","inputAcionamento","fa fa-bell-o","font-weight-bold","Acionado","","","","divAcionamento") ?>
+
+                <?= isset($selectEquipe)?$form->divSelect($selectEquipe,"selectEquipeAcionada","Equipe Acionada","fa fa-bell-o","col-3","js-example-basic-single","divEquipeAcionada"):"" ?>
+
+                <div id="divDescricao" class="col-12">
+                    <label for="textareaDescricao" class="font-weight-bold">Descrição</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-align-justify" aria-hidden="true"></i></span>
+                        <textarea class="form-control textareaCkeditor" id="textareaDescricao" name="textareaDescricao" rows="1" required></textarea>
+                    </div>
+                </div>
+
+                <input type="hidden" id="hiddenUsuario" name="hiddenUsuario" value="<?= isset($userNome)?$userNome->nome:null ?>">
+
+                <div class="col-12">
+                    <button type="submit" id="submitRegistro" name="submitRegistro" class="btn btn-outline-primary"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Cadastra</button>
+                </div>
+            </div>
+        </div>
+        </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalCadastrarSistema" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Cadastrar Sistema</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="formModalCadastroSistema" action="">
+                        <div class="form-group row">
+                            <label for="inputSigla" class="col-sm-3 col-form-label">Sigla</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputSigla" name="inputSigla" placeholder="SIMGA" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputModalIC" class="col-sm-3 col-form-label">IC</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputModalIC" name="inputModalIC" placeholder="7562APL-SIMGA" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputModalLink" class="col-sm-3 col-form-label">Link</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputModalLink" name="inputModalLink" placeholder="simga.caixa" required>
+                            </div>
+                        </div>
+
+                        <fieldset id="fieldsetRadioModal" class="form-group">
+                            <div class="row">
+                                <legend class="col-form-legend col-sm-3">Sistema Monitorado</legend>
+                                <div id="containerRadioModal" class="col-sm-9 d-flex justify-content-center">
+                                    <div class="form-check form-check-inline container">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="radioModalMonitorado" id="radioModalMonitorado1" value="S" required checked> Sim
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline container">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="radioModalMonitorado" id="radioModalMonitorado2" value="N" required> Não
+                                        </label>
+                                    </div>
+                                </<div>
+                            </div>
+                        </fieldset>
+                        
+                        <div class="form-group row">
+                            <label for="selectUnidade" class="col-sm-3 col-form-label">Unidade de Atendimento</label>
+                            <div class="col-sm-9">
+                                <select id="selectUnidade" name="selectUnidade" class="form-control" required>
+                                    <option selected disabled></option>
+                                    <?php
+                                        if (isset($selectUnidade)) {
+                                            foreach ($selectUnidade as $uni) {
+                                                echo "<option>$uni[0]</option>";
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <label for="textareaDescricaoSistema" class="col-sm-3 col-form-label">Descrição</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="textareaDescricaoSistema" name="textareaDescricaoSistema" rows="3" placeholder="Descricao Sistema" required></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    
+                    <div id="testando1"></div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" id="submitCadastraSistema" name="submitCadastraSistema" class="btn btn-outline-primary btn-lg btn-block">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalCadastrarCliente" tabindex="-1" role="dialog" aria-labelledby="hTitleCliente" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="hTitleCliente">Cadastrar Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="formModalCadastroCliente" action="">
+                        <div class="form-group row">
+                            <label for="inputClienteModal" class="col-sm-3 col-form-label">Cliente</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputClienteModal" name="inputClienteModal" placeholder="Cliente" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputMatricula" class="col-sm-3 col-form-label">Matrícula</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputMatricula" name="inputMatricula" placeholder="P999999" maxlength="7" minlength="7" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputContato" class="col-sm-3 col-form-label">Contato</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputContato" name="inputContato" placeholder="61 99999-9999" maxlength="15" minlength="14" max="15" min="14" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputModalSiteCliente" class="col-sm-3 col-form-label">Site Cliente</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputModalSiteCliente" name="inputModalSiteCliente" placeholder="7562-CETEC" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="inputModalCargo" class="col-sm-3 col-form-label">Cargo</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputModalCargo" name="inputModalCargo" placeholder="Prestador" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="selectModalEquipe" class="col-sm-3 col-form-label">Equipe</label>
+                            <div class="col-sm-9">
+                                <select class="js-example-basic-single" id="selectModalEquipe" name="selectModalEquipe" required>
+                                    <option selected disabled></option>
+                                    <?php
+                                        if (isset($selectEquipe)) {
+                                            foreach ($selectEquipe as $e) {
+                                                echo "<option value='$e[0]'>$e[0]</option>";
+                                            }
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="selectModalEmpresa" class="col-sm-3 col-form-label">Empresa</label>
+                            <div class="col-sm-9">
+                                <select class="js-example-basic-single" id="selectModalEmpresa" name="selectModalEmpresa" required>
+                                    <option selected disabled></option>
+                                    <?php
+                                    if (isset($selectEmpresa)) {
+                                        foreach ($selectEmpresa as $e) {
+                                            echo "<option value='$e[0]'>$e[0]</option>";
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="returnAjaxCliente"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="submitCadastraCliente" name="submitCadastraSistema" class="btn btn-outline-primary btn-lg btn-block">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="formAjaxTeste"></div>
+</section>

@@ -1,9 +1,77 @@
-<?php require_once "inc/header.phtml"; ?>
+<?php require_once "header/head.phtml"; ?>
+    <body id="body-fundo">
 
-<?php 
-	if (isset($page)) {
-		require_once "pages/".$page.".phtml";
-	} 
+<?php
+
+    if (isset($page)) {
+        switch ($page) {
+            case "SRCAM":
+                require_once "app/Classes/ManipularBD.php";
+                $bd = new ManipularBD();
+    
+                require_once "header/nav.phtml";
+                require_once "body/menu/listNav.phtml";
+                require_once "body/home/home.phtml";
+    
+                break;
+
+            case "registrar/inserir":
+                
+                require_once "app/Classes/ManipularBD.php";
+                $bd = new ManipularBD();
+
+                require_once "header/nav.phtml";
+                require_once "body/menu/listNav.phtml";
+                require_once "body/registro/inserir.phtml";
+
+                break;
+
+            case "registrar/alterar":
+
+                require_once "app/Classes/ManipularBD.php";
+                $bd = new ManipularBD();
+
+                require_once "header/nav.phtml";
+                require_once "body/menu/listNav.phtml";
+                require_once "body/registro/alterar.phtml";
+
+                break;
+
+            case "registrar/visualizar":
+
+                require_once "app/Classes/ManipularBD.php";
+                $bd = new ManipularBD();
+
+                require_once "header/nav.phtml";
+                require_once "body/menu/listNav.phtml";
+                require_once "body/registro/visualizar.phtml";
+
+                break;
+
+            case "registrar/excluir":
+
+                require_once "app/Classes/ManipularBD.php";
+                $bd = new ManipularBD();
+
+                require_once "header/nav.phtml";
+                require_once "body/menu/listNav.phtml";
+                require_once "body/registro/excluir.phtml";
+
+                break;
+
+            case "Admin":
+                require_once "header/nav.phtml";
+                require_once "body/administrativo/index.phtml";
+                break;
+                
+            case "Login":
+                require_once "body/login/login.phtml";
+                break;
+        }
+    }
+
+
+
+    require_once "footer/footer.phtml";
+
 ?>
-
-<?php require_once "inc/footer.phtml"; ?>			

@@ -1,0 +1,26 @@
+<?php if(isset($erro)): ?>
+    <div class="alert alert-danger" role="alert"><?= isset($erro)?$erro:''; ?></div>
+<?php endif; ?>
+
+<form class="form-signin" action="<?= PATH ?>/login" method="post">
+    <h2 id="h2TituloLogin" class="form-signin-heading">SRCAM</h2>
+
+    <div class="row">
+        <div class="col-12">
+            <label for="loginUsername" class="sr-only">Matrícula</label>
+            <div class="input-group mb-2 mb-sm-0">
+                <div class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                <input type="text" name="loginUsername" id="loginUsername" class="form-control" placeholder="Matrícula" required autofocus>
+            </div>            
+        </div>
+        <div class="col-12">
+            <label for="loginSenha" class="sr-only">Senha</label>
+            <div class="input-group mb-2 mb-sm-0">
+                <div id="passInputAddon" class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></div>
+                <input type="password" name="loginSenha" id="loginSenha" class="form-control" placeholder="Senha" required>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Logar</button>
+</form>

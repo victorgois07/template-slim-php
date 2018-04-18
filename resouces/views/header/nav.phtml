@@ -1,0 +1,129 @@
+<?php
+    $href = array(
+        0 => PATH."/public/img/logo.png",
+        1 => PATH."/public/img/user.png",
+        2 => PATH."/public/img/logout.png",
+        3 => PATH."/public/img/040-lock.png",
+        4 => PATH."/public/img/load.gif"
+    );
+
+    $nome = isset($userNome)?$userNome->nome:'ERRO NO LOGIN';
+?>
+
+<header id="nav-header-home" class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a id="aLogoContainer" class="navbar-brand">
+        <img id="img-logo" src="<?= $href[0] ?>" alt="">
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <ul class="navbar-nav mr-auto"></ul>
+
+        <ul class="navbar-nav my-2 my-lg-0">
+
+            <li class="nav-item active">
+
+                <a id="aUser" class="nav-link" title="<?= $nome ?>" data-toggle="modal" data-target="#modalTrocaSenha">
+
+                    <img class="icons_menu_img" src="<?= $href[1] ?>"/>
+                    <?= $nome ?>
+
+                </a>
+
+            </li>
+            
+            <li class="nav-item">
+
+                <a id="aNavLinkLogout" class="nav-link"><img class="icons_menu_img" src="<?= $href[2] ?>"/> Logout</a>
+
+            </li>
+
+        <?php if (isset($tipo) && $tipo == "Administrador") { ?>
+
+            <li class="nav-item">
+
+                <a id="aNavLinkAdmin" class="nav-link"><img class="icons_menu_img" src="<?= $href[3] ?>"/> Admin</a>
+
+            </li>
+
+        <?php } ?>
+
+        </ul>
+    </div>
+</header>
+
+<div id="loader" style="background-image: url('<?= $href[4] ?>');"></div>
+
+<!-- The Modal -->
+<div class="modal fade" id="modalTrocaSenha">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+
+                <h4 class="modal-title">Troca Senha</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+
+                <form id="formTrocaSenha" method="post" action="">
+
+                    <div class="form-group row">
+
+                        <label for="passwordOld" class="col-sm-3 col-form-label">Senha Antiga</label>
+
+                        <div class="col-sm-9">
+
+                            <input type="password" class="form-control" id="passwordOld" name="passwordOld" placeholder="Password">
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <label for="passwordNew" class="col-sm-3 col-form-label">Senha Nova</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="passwordNew" name="passwordNew" placeholder="Password" data-minlength="6">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <label for="passwordNewRepet" class="col-sm-3 col-form-label">Repetir Senha</label>
+
+                        <div class="col-sm-9">
+
+                            <input type="password" class="form-control" id="passwordNewRepet" name="passwordNewRepet" placeholder="Password" data-minlength="6" data-match="#passwordNew" data-match-error="Atenção! As senhas não estão iguais." required>
+
+                        </div>
+
+                        <div class="help-block with-errors"></div>
+
+                    </div>
+
+                    <input type="hidden" id="hiddenNome" name="hiddenNome" value="<?= $nome ?>">
+                    <button type="button" id="submitTrocaSenha" class="btn btn-outline-primary">TROCAR</button>
+
+                </form>
+
+                <div id="testando"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

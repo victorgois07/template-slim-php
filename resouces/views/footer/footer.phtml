@@ -1,0 +1,40 @@
+
+    <?php
+        echo $lib->footerPadrao();
+
+        if (isset($page)){
+            switch ($page){
+
+                case "SRCAM":
+                case "Admin":
+                    echo $lib->footerFinal();
+                    break;
+
+                case "registrar/inserir":
+                case "registrar/alterar":
+                case "registrar/excluir":
+                    echo $lib->footerInserir();
+                    break;
+
+                case "registrar/visualizar":
+                    echo $lib->footerRegistrarVisualizar();
+                    break;
+                
+                case "crud":
+                    echo $lib->footerInserir();
+                    break;
+
+                case "tutorial":
+                    echo $lib->footerTutorial();
+                    break;
+
+                case "Login":
+                    echo $lib->footerLogin();
+                    break;
+            }
+        }
+
+    ?>
+    
+    </body>
+</html>
